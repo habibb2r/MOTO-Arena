@@ -56,7 +56,7 @@ const Login = () => {
         });
       }
       // dispatch(setUser({ user: user, token: result.data.accessToken }));
-      dispatch(setToken({ token: result.data.accessToken, user: user }))
+      dispatch(setToken({ token: result.data.accessToken, user: {...user, ...result?.data.user} }))
       navigate("/");
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
