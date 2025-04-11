@@ -1,0 +1,17 @@
+.forPc{
+    display: block
+}
+.forPhone{
+    display: none
+}
+
+@media (max-width: 768px) {
+    .forPc{
+        display: none
+    }
+    .forPhone{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
