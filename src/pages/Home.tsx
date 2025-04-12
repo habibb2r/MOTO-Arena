@@ -46,10 +46,10 @@ const Home = () => {
 
      
   
-           <div className="bg-orange-50 mx-[3%] rounded-xl shadow-lg shadow-green-500">
+           <div className="bg-orange-50 mx-[3%] rounded-xl shadow-lg shadow-green-500 px-[5%] py-[3%]">
         <div className="flex flex-col  md:flex-row lg:flex-row items-center justify-between px-10 py-26 gap-16 container mx-auto ">
           {/* Left Side - Large Text */}
-          <div className="lg:w-1/2 text-center lg:text-left">
+          <div className="md:w-1/2 text-center lg:text-left">
             <h4 className="text-xl md:text-2xl font-medium text-orange-500 mb-4 md:mb-5 lg:mb-8 capitalize">
               Discover the Latest Models -
             </h4>
@@ -69,7 +69,7 @@ const Home = () => {
           </div>
 
         
-          <div className="lg:w-1/2 flex justify-center">
+          <div className="md:w-1/2 flex justify-center">
             <img
               src={explore}
               alt="Explore Our Bikes"

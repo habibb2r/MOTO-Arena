@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TProductOrder } from "../../../components/ui/CheckOutForm";
 import { baseApi } from "../../api/baseApi";
 
@@ -19,7 +20,7 @@ const orderApi = baseApi.injectEndpoints({
       }),
       order:builder.mutation<any, TProductOrder>({
         query: (Orderdoc) => ({
-          url: `api/order/pay`,
+          url: `api/orders/make-order`,
           method: "POST",
           body: Orderdoc,
         }),

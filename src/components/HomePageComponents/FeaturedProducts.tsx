@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom'; // To navigate to the all products page
 import { useGetAllProductsQuery } from '../../redux/features/products/productApi'; // Assuming RTK Query
-import ProductCard from '../ProductCard'; // Assuming you have a ProductCard component
+
 import { TProduct } from '../../redux/types/product';
 import Title from './Title';
+import ProductCard from '../ui/ProductCard';
 
 const FeatureSection = () => {
   const [featuredProducts, setFeaturedProducts] = useState<TProduct[]>([]);
@@ -32,7 +33,14 @@ const FeatureSection = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {featuredProducts.length > 0 ? (
             featuredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard   key={product?._id}
+              name={product?.name}
+              category={product?.category}
+              brand={product?.brand}
+              price={product?.price}
+              inStock={product?.inStock}
+              photoURL ={product?.photo as string}
+              url={`/products/${product?._id}`} />
             ))
           ) : (
             <div className="text-center">No featured products available.</div>
