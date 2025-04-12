@@ -94,7 +94,7 @@ const Navbar = () => {
         <Divider></Divider>
       </ul>
       
-        <Link onClick={() => setOpen(!open)} className='px-3 py-2 border-2 border-gray-300 rounded-2xl font-semibold' to={'/dashboard'}>Dashboard</Link>
+        <Link onClick={() => setOpen(!open)} className='px-3 py-2 border-2 border-gray-300 rounded-2xl font-semibold' to={`/dashboard/${user?.role}`}>Dashboard</Link>
         <Divider></Divider>
         <button onClick={() => dispatch(logout())} className="bg-[#862020] text-white px-4 py-1 rounded">Logout</button>
       </Drawer>
