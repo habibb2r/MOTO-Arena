@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .bg-myGradient {
-  background-image: linear-gradient(to right, #9af8f0, #3affa3);
+  background-image: linear-gradient(to right, #ffffff, #ffffff);
 }
 
 .myBtn {
