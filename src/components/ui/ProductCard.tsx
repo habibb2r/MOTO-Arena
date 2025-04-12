@@ -1,10 +1,10 @@
-import { EyeFilled } from '@ant-design/icons';
-import { Tooltip } from 'antd';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { EyeFilled } from "@ant-design/icons";
+import { Tooltip } from "antd";
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
-
   name: string;
   category: string;
   brand: string;
@@ -21,47 +21,74 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   inStock,
   photoURL,
-  url
+  url,
 }) => {
   return (
-    <div className="relative group  rounded-lg shadow-xl shadow-green-400 overflow-hidden border-2 border-transparent hover:border-gradient transition-all duration-100">
-      <div className="relative p-6 rounded-lg">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transform transition-all duration-300 overflow-hidden"
+    >
+      {/* Image Container */}
+      <div className="relative group h-56 overflow-hidden">
+        <motion.img
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.4 }}
+          src={photoURL}
+          alt={name}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
 
-        <div className="w-full h-48 overflow-hidden rounded-lg mb-4">
-          <img
-            src={photoURL}
-            alt={name}
-            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-          />
-        </div>
-        <Tooltip title={name} >
-          <h2 className="text-lg font-bold text-gray-800 mb-2 truncate">{name}</h2>
-        </Tooltip>
-       
-        <p className="text-sm  mb-1 font-semibold">
-          <span className="font-semibold">Category:</span> {category}
-        </p>
-        <p className="text-sm  mb-1 font-semibold">
-          <span className="font-semibold">Brand:</span> {brand}
-        </p>
-        <p className="text-sm  mb-4 font-semibold">
-          <span className="font-semibold">Price:</span> ${price.toLocaleString()}
-        </p>
-        <div className='flex justify-between p-1 items-center'>
-          <div>
-            <Link className='px-3 py-2 rounded-full border-none bg-green-700 text-white text-sm' to={url}>
-            View Details <EyeFilled/>
-            </Link>
-          </div>
+        {/* Status Badge */}
+        <div className="absolute top-4 right-4">
           <div
-            className={`inline-block px-2 py-1 rounded-full text-sm font-semibold ${inStock ? 'bg-white text-green-700' : 'bg-red-100 text-red-700'
-              }`}
+            className={`px-3 py-1 rounded-full text-sm font-medium ${
+              inStock ? "bg-green-500 text-white" : "bg-red-500 text-white"
+            }`}
           >
-            {inStock ? 'Available' : 'Out of Stock'}
+            {inStock ? "In Stock" : "Out of Stock"}
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Content Container */}
+      <div className="p-5 space-y-4">
+        <div className="space-y-2">
+          <Tooltip title={name}>
+            <h2 className="text-xl font-bold text-gray-800 truncate hover:text-orange-500 transition-colors">
+              {name}
+            </h2>
+          </Tooltip>
+
+          <div className="flex flex-wrap gap-2">
+            <span className="px-2 py-1 bg-gray-100 rounded-md text-sm text-gray-600">
+              {category}
+            </span>
+            <span className="px-2 py-1 bg-gray-100 rounded-md text-sm text-gray-600">
+              {brand}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="text-2xl font-bold text-orange-500">
+            ${price.toLocaleString()}
+          </div>
+
+          <Link
+            to={url}
+            className="group flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full transition-all duration-300"
+          >
+            <span>View</span>
+            <EyeFilled className="group-hover:scale-110 transition-transform" />
+          </Link>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
