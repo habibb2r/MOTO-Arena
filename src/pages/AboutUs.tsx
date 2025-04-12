@@ -1,117 +1,53 @@
-import Header from "../components/AboutPageComponents/Header";
-import banner from "../assets/banner3.jpg"
-import person1 from "../assets/images/person1.png";
-import person2 from "../assets/images/person2.png";
-import person3 from "../assets/images/person3.png";
 
-import { motion } from "framer-motion";
-
-
-const teamMembers = [
-  {
-    name: "Md Habib Ullah",
-    role: "Full Stack Developer",
-    image: person1
-  },
-  {
-    name: "Mehedi Hasan",
-    role: "Full Stack Developer",
-    image: person2
-  },
-  {
-    name: "Rakibul Hasan",
-    role: "Full Stack Developer",
-    image: person3
-  },
-  {
-    name: "Tahmidul Islam Tausif",
-    role: "Full Stack Developer",
-    image: person3
-  },
-  {
-    name: "Muvin Mohammad",
-    role: "Full Stack Developer",
-    image: person3
-  },
-  {
-    name: "Rajoan Bosunia",
-    role: "Full Stack Developer",
-    image: person3
-  },
-];
+import banner from "../assets/banner.png";
+import Title from "../components/HomePageComponents/Title";
 
 export default function Home() {
   return (
     <div>
-        <section className=""><Header image={banner} text={"About Us"} ></Header></section>
+     <Title title="About Us" subtitle="Learn more about Moto Arena"></Title>
+
       {/* Hero Section */}
+      <div className="flex justify-center items-center gap-5">
       <section className="text-center py-16 px-4">
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-bold "
-        >
-          Welcome to Bike Museum Family
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mt-4 text-lg md:text-xl "
-        >
+        <h1 className="text-3xl md:text-5xl font-bold">
+          Welcome to Moto Arena Family
+        </h1>
+        <p className="mt-4 text-lg md:text-xl">
           Your trusted destination for premium bikes & accessories.
-        </motion.p>
+        </p>
       </section>
+      <div>
+        <img src={banner} alt="" />
+      </div>
+      </div>
 
-      {/* Team Section */}
-      <section className="py-16 px-4">
-        <motion.h2
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-semibold text-center mb-10 "
-        >
-          Meet Our Team
-        </motion.h2>
-
-        <div className="grid  md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {teamMembers.map((member, idx) => (
-           <div key={idx}>
-             <motion.div
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.2 }}
-              className="bg-white/10 rounded-xl p-6 shadow-lg text-center"
-            >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-24 md:w-28 lg:w-36 h-24 md:h-28 lg:h-36 rounded-full mx-auto object-top border-2 border-white mb-4"
-              />
-              <h3 className="text-xl font-semibold">{member.name}</h3>
-              <p className="text-sm ">{member.role}</p>
-            </motion.div>
-           </div>
-          ))}
+      {/* About Moto Arena Section */}
+      <section className="bg-gray-100 py-16 px-4 mx-[4%] rounded-2xl shadow-lg">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+            About Moto Arena
+          </h2>
+          <p className="mt-6 text-lg md:text-xl text-gray-600 leading-relaxed">
+            At Moto Arena, we are passionate about motorcycles and the thrill
+            of the ride. As a premier motorcycle shop, we offer a wide range of
+            bikes, from sleek sports models to rugged adventure bikes, catering
+            to riders of all styles and preferences. Our mission is to provide
+            top-quality motorcycles, accessories, and exceptional customer
+            service to help you embark on your next journey with confidence.
+          </p>
+          <p className="mt-4 text-lg md:text-xl text-gray-600 leading-relaxed">
+            Whether you're a seasoned rider or just starting your biking
+            adventure, Moto Arena is your one-stop destination for all things
+            motorcycles. Explore our diverse collection and experience the
+            freedom of the open road like never before.
+          </p>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 px-4 w-full ">
-        <motion.h2
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-semibold text-center mb-10 "
-        >
-          Contact Us
-        </motion.h2>
-
+      <section className="py-16 px-4 w-full">
+        <h2 className="text-3xl font-semibold text-center mb-10">Contact Us</h2>
         <form className="max-w-3xl mx-auto space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
@@ -122,7 +58,7 @@ export default function Home() {
             <input
               type="email"
               placeholder="Your Email"
-              className="p-3 rounded border-1 border-blue-400 w-full "
+              className="p-3 rounded border-1 border-blue-400 w-full"
             />
           </div>
           <textarea
@@ -130,10 +66,7 @@ export default function Home() {
             rows={5}
             className="p-3 rounded border-1 border-blue-400 w-full"
           ></textarea>
-          <button
-            type="submit"
-            className="myBtn"
-          >
+          <button type="submit" className="myBtn">
             Send Message
           </button>
         </form>

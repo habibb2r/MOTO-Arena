@@ -1,13 +1,13 @@
 import { Button, Modal, Result, Skeleton } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
 import { useState } from "react";
 import CheckoutForm from "../../components/ui/CheckOutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useAppSelector } from "../../redux/hooks";
+import { useGetSingleProductQuery } from "../../redux/features/products/productApi";
 
-export function ProductDetails() {
+const  ProductDetails =() =>{
   const productIdDb = useParams();
   const [openResponsive, setOpenResponsive] = useState(false);
   const [openOnSeccess, setOpenOnSeccess] = useState(false);
@@ -177,3 +177,5 @@ export function ProductDetails() {
     </section>
   );
 }
+
+export default ProductDetails;

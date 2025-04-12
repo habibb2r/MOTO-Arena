@@ -95,7 +95,7 @@ const AllProducts = () => {
                         price={product?.price}
                         inStock={product?.inStock}
                         photoURL ={product?.photo as string}
-                        url={`/product/${product?._id}`}
+                        url={`/products/${product?._id}`}
                     />
                 ))) : (<div className="flex justify-center items-center lg:col-span-4 md:col-span-3 sm:col-span-2 col-span-1">
                      <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />

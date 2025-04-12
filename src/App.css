@@ -24,3 +24,50 @@
     background-image: linear-gradient(to left, #08b9ff, #920404); /* hover:gradient */
   }
   
+
+  .resOutLet{
+    padding-top: 6%;
+  }
+
+  @media (max-width: 768px) {
+    .resOutLet{
+        padding-top: 20%;
+    }
+  }
+
+
+  .moto-heading {
+    font-size: 3.5rem; 
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 20%;
+  }
+  
+  @media (max-width: 768px) {
+    .moto-heading {
+      font-size: 3rem; 
+      top: 30%;
+      left: 5%;
+    }
+  }
+  
+  .moto-subtext {
+    font-size: 1.5rem; /* Tailwind's text-xl */
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    margin-top: 8%;
+  }
+  
+  @media (max-width: 768px) {
+    .moto-subtext {
+      font-size: 0.9rem; /* Tailwind's md:text-2xl */
+      top: 45%;
+      left: 10%;
+      padding: 5%;
+    }
+  }
+  
