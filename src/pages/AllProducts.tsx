@@ -68,7 +68,7 @@ const AllProducts = () => {
     setSearchTerm(event.target.value);
   };
   return (
-    <div className="px-5">
+    <div className="px-5 pb-5">
       <FilterModal
         open={openFilter}
         setOpen={setOpenFilter}
