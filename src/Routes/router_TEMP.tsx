@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../Dashboard/LayOuts/DashboardLayout";
 import UserProfile from "../Dashboard/Customer/UserProfile";
 import UpdateProfile from "../Dashboard/Customer/UpdateProfile";
+import MyOrders from "../Dashboard/Customer/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
       { path: '/dashboard/customer', element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
-      // { path: 'orders', element: <ProtectedRoute> <Orders /></ProtectedRoute> },
+      { path: 'my-orders', element: <ProtectedRoute> <MyOrders /></ProtectedRoute> },
       { path: 'update', element: <ProtectedRoute> <UpdateProfile /></ProtectedRoute> },
 
 

@@ -6,7 +6,7 @@ const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrders: builder.query<any, {email:string}>({
         query: (user) => ({
-          url: `api/order/get/${user?.email}`,
+          url: `api/orders/myorders/${user?.email}`,
           method: "GET",
        
         }),

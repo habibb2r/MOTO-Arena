@@ -10,7 +10,7 @@ const SideBar = () => {
     {
       name: "My Orders",
       icon: ShoppingCartOutlined,
-      path: "/dashboard/my-orders",
+      path: "/dashboard/customer/my-orders",
     },
   ];
 

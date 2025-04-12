@@ -1,5 +1,5 @@
 import { Button, Modal, Result, Skeleton } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CheckoutForm from "../../components/ui/CheckOutForm";
 import { Elements } from "@stripe/react-stripe-js";
@@ -294,12 +294,11 @@ const ProductDetails = () => {
             >
               View all products
             </Button>,
-            <Button
-              key="buy"
+            <Link to={'/dashboard/customer/my-orders'}
               className="border-green-600 text-green-600 hover:bg-green-50"
             >
               Give a review
-            </Button>,
+            </Link>,
           ]}
         />
       </Modal>
