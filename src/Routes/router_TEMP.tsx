@@ -10,6 +10,7 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../Dashboard/LayOuts/DashboardLayout";
 import UserProfile from "../Dashboard/Customer/UserProfile";
+import UpdateProfile from "../Dashboard/Customer/UpdateProfile";
 
 
 export const router = createBrowserRouter([
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
       { index: true, element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
       { path: '/dashboard/customer', element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
       // { path: 'orders', element: <ProtectedRoute> <Orders /></ProtectedRoute> },
-      // { path: 'update', element: <ProtectedRoute> <UpdateProfile /></ProtectedRoute> },
+      { path: 'update', element: <ProtectedRoute> <UpdateProfile /></ProtectedRoute> },
 
 
     ]
