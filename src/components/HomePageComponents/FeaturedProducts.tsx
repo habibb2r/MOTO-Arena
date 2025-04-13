@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom'; // To navigate to the all products page
-import { useGetAllProductsQuery } from '../../redux/features/products/productApi'; // Assuming RTK Query
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // To navigate to the all products page
+import { useGetAllProductsQuery } from "../../redux/features/products/productApi"; // Assuming RTK Query
 
-import { TProduct } from '../../redux/types/product';
-import Title from './Title';
-import ProductCard from '../ui/ProductCard';
+import { TProduct } from "../../redux/types/product";
+import Title from "./Title";
+import ProductCard from "../ui/ProductCard";
 
 const FeatureSection = () => {
   const [featuredProducts, setFeaturedProducts] = useState<TProduct[]>([]);
 
-
-  // Fetch all products from the API
   const { data, isLoading, error } = useGetAllProductsQuery({});
 
-  // Update the featured products once data is fetched
   useEffect(() => {
     if (data && data.data) {
-      setFeaturedProducts(data.data.slice(0, 3)); // Get the first 3 products
+      setFeaturedProducts(data.data.slice(0, 3));
     }
   }, [data]);
 
   return (
     <section className="px-14 py-20">
-      <Title title={'Featured Products'} subtitle={'Check out our featured products'}></Title>
+      <Title
+        title={"Featured Products"}
+        subtitle={"Check out our featured products"}
+      ></Title>
 
-      {/* Check for loading or error */}
       {isLoading ? (
         <div className="text-center">Loading...</div>
       ) : error ? (
@@ -33,14 +32,16 @@ const FeatureSection = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {featuredProducts.length > 0 ? (
             featuredProducts.map((product) => (
-              <ProductCard   key={product?._id}
-              name={product?.name}
-              category={product?.category}
-              brand={product?.brand}
-              price={product?.price}
-              inStock={product?.inStock}
-              photoURL ={product?.photo as string}
-              url={`/products/${product?._id}`} />
+              <ProductCard
+                key={product?._id}
+                name={product?.name}
+                category={product?.category}
+                brand={product?.brand}
+                price={product?.price}
+                inStock={product?.inStock}
+                photoURL={product?.photo as string}
+                url={`/products/${product?._id}`}
+              />
             ))
           ) : (
             <div className="text-center">No featured products available.</div>
@@ -48,11 +49,13 @@ const FeatureSection = () => {
         </div>
       )}
 
-      {/* View More Button */}
-      <div className="text-center mt-6 pt-8">
-      <Link to={`/products`} className="px-3 py-2 rounded-xl border-none bg-green-700 text-white text-sm hover:bg-green-800 transition duration-300">
-            View More
-          </Link>
+      <div className="text-center mt-6 pt-8 flex justify-center items-center">
+        <Link
+          to={`/products`}
+          className="group flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full transition-all duration-300"
+        >
+          View More
+        </Link>
       </div>
     </section>
   );

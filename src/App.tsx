@@ -11,7 +11,7 @@ function App() {
       
       <div className="bg-myGradient text-black  min-h-screen ">
         <Navbar></Navbar>
-        <div className='resOutLet'>
+        <div className='pt-[3%]'>
 
         <Outlet></Outlet>
         </div>

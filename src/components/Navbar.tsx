@@ -27,7 +27,7 @@ const Navbar = () => {
       toast.success('Logout Successfully')
     }
   return (
-    <nav className="fixed  w-full mx-auto flex justify-between items-center px-6 py-4 shadow-md navbar text-black font-semibold">
+    <nav className="fixed  w-full mx-auto flex justify-between items-center px-6 py-[1.5%] shadow-md navbar text-black font-semibold">
       {/* Logo */}
       <Link to="/">
         <img className="h-[50px]" src={logo} alt="Logo" />

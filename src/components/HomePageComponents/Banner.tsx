@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-[100vh] overflow-hidden">
+    <div className="relative w-full h-[100vh] overflow-hidden mt-[-3%]">
       <video
         autoPlay
         loop
@@ -13,7 +13,7 @@ const Banner = () => {
         <source src={video} type="video/mp4" />
       </video>
 
-      {/* Gradient Overlay */}
+     
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
 
       {/* Content Container */}
