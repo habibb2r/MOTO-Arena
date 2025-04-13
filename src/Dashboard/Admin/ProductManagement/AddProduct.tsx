@@ -1,11 +1,16 @@
-import { DashboardHeader } from "../../../components/sider/DashboardHeader";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Button, Form, Input, InputNumber, Spin } from "antd";
 const { TextArea } = Input;
 import { useEffect, useState } from "react";
-import PhotoUpload from "../../../components/form/PhotoUpload";
+
 import { toast } from "sonner";
-import { useAddProductMutation } from "../../../redux/features/product/productApi";
+
 import { useNavigate } from "react-router-dom";
+import DashboardTitle from "../../LayOuts/DashboardTitle";
+import UploadPhoto from "../../../components/UploadPhoto/UploadPhoto";
+import { useAddProductMutation } from "../../../redux/features/products/productApi";
+import GeneratePhotoURL from "../../../components/UploadPhoto/GeneratePhotoURL";
 
 const AddProduct = () => {
   const [fileList, setFileList] = useState([]);
@@ -21,7 +26,7 @@ const AddProduct = () => {
     if(error){
       toast.error((error as any)?.data?.message||"Added Product failed")
     }
-  },[data,error])
+  },[data,error,navigate,form])
   const handleAddProduct = async (values: any) => {
     if (fileList.length === 0) {
       return toast.error("Please provide an image");
@@ -42,29 +47,29 @@ const AddProduct = () => {
     if (!values?.description) {
       return toast.error("Please provide a description");
     }
-    if (!values?.model) {
-      return toast.error("Please provide a model");
-    }
     if (!values?.quantity) {
       return toast.error("Please provide a quantity");
     }
 
+    const formData = new FormData();
+    formData.append("file", fileList[0]);
+    const imageUrl = await GeneratePhotoURL(fileList[0]);
+    if (!imageUrl) {
+      return toast.error("Failed to upload image");
+    }
+
     const productDoc = {
-      productName: values.productName,
-      model: values.model,
+      name: values.productName,
       category: values.category,
       brand: values.brand,
       price: values.price,
       description: values.description,
-      quantity: values?.quantity
+      quantity: values?.quantity,
+      photo: imageUrl,
     };
 
-    const formData = new FormData();
-    formData.append("file", fileList[0]);
-    formData.append("data", JSON.stringify(productDoc));
-
     try {
-      await addproduct(formData);
+      await addproduct(productDoc);
     } catch (error) {
       toast.error("An error occurred while adding the product");
       console.error(error);
@@ -73,7 +78,7 @@ const AddProduct = () => {
 
   return (
     <div className="p-4 space-y-5">
-      <DashboardHeader title="Add Product" />
+      <DashboardTitle title="Add Product" />
       <div>
        <Spin spinning={isLoading}>
        <Form
@@ -89,14 +94,6 @@ const AddProduct = () => {
               label="Product Name"
             >
               <Input placeholder="Product name" />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true, message: "Must be provide model" }]}
-              className="w-full"
-              name="model"
-              label="Model"
-            >
-              <Input placeholder="Model" />
             </Form.Item>
             <Form.Item
               rules={[{ required: true, message: "Must be provide category" }]}
@@ -131,7 +128,7 @@ const AddProduct = () => {
               <InputNumber style={{ width: "100%" }} placeholder="Quantity" />
             </Form.Item>
             <Form.Item className="w-full" label="Upload photo" name="photoURL">
-              <PhotoUpload fileList={fileList} setFileList={setFileList} />
+              <UploadPhoto fileList={fileList} setFileList={setFileList} />
             </Form.Item>
             <Form.Item
               rules={[

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { Spin, Empty } from "antd";
+import { Spin, Empty, Table, Button, Space, Tooltip } from "antd";
+import { toast } from "sonner";
+import { LoadingOutlined } from "@ant-design/icons";
+import { FaFilter, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
+import { motion } from "framer-motion";
 import {
   useAllbrandandcategoryQuery,
   useGetAllProductsQuery,
-} from "../redux/features/products/productApi";
-import { toast } from "sonner";
-import { LoadingOutlined } from "@ant-design/icons";
-import { FilterModal } from "../components/modalFilter/Filtermodal";
-import { TProduct } from "../redux/types/product";
-import ProductCard from "../components/ui/ProductCard";
-import Title from "../components/HomePageComponents/Title";
-import { FaFilter, FaSearch } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+} from "../../../redux/features/products/productApi";
+import { FilterModal } from "../../../components/modalFilter/Filtermodal";
+import DashboardTitle from "../../LayOuts/DashboardTitle";
+import { TProduct } from "../../../redux/types/product";
 
 interface FilterValues {
   minPrice?: number;
@@ -21,7 +20,7 @@ interface FilterValues {
   isAvailable?: boolean;
 }
 
-const AllProducts = () => {
+const ManageProducts = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [getminPrice, setMinPrice] = useState(0);
@@ -40,8 +39,6 @@ const AllProducts = () => {
     minPrice: getminPrice,
   });
 
-  console.log("getAllProducts", getAllProducts);
-
   const { data: allbrandandcategory, isLoading: filterLoading } =
     useAllbrandandcategoryQuery({});
 
@@ -49,7 +46,6 @@ const AllProducts = () => {
   const allCategory = allbrandandcategory?.data[0]?.categories;
 
   useEffect(() => {
-  
     const filters: string[] = [];
     if (getbrand) filters.push(getbrand);
     if (getCategory) filters.push(getCategory);
@@ -96,19 +92,111 @@ const AllProducts = () => {
     toast.success("Filters cleared");
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+  const columns = [
+    {
+      title: "Image",
+      dataIndex: "photo",
+      key: "photo",
+      render: (photo: string) => (
+        <img
+          src={photo}
+          alt="product"
+          className="w-16 h-16 object-cover rounded-lg"
+        />
+      ),
     },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a: TProduct, b: TProduct) => a.name.localeCompare(b.name),
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+      filters: allCategory?.map((cat: string) => ({ text: cat, value: cat })),
+      onFilter: (value: unknown, record: TProduct) => record.category === value,
+    },
+    {
+      title: "Brand",
+      dataIndex: "brand",
+      key: "brand",
+      filters: allBrand?.map((brand: string) => ({
+        text: brand,
+        value: brand,
+      })),
+      onFilter: (value: unknown, record: TProduct) => record.brand === value,
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      render: (price: number) => `$${price.toLocaleString()}`,
+      sorter: (a: TProduct, b: TProduct) => a.price - b.price,
+    },
+    {
+      title: "Stock",
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (quantity: number) => (
+        <span className={quantity > 0 ? "text-green-600" : "text-red-600"}>
+          {quantity}
+        </span>
+      ),
+      sorter: (a: TProduct, b: TProduct) => a.quantity - b.quantity,
+    },
+    {
+      title: "Status",
+      dataIndex: "inStock",
+      key: "inStock",
+      render: (inStock: boolean) => (
+        <span
+          className={`px-2 py-1 rounded-full text-sm ${
+            inStock ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+          }`}
+        >
+          {inStock ? "In Stock" : "Out of Stock"}
+        </span>
+      ),
+      filters: [
+        { text: "In Stock", value: true },
+        { text: "Out of Stock", value: false },
+      ],
+      onFilter: (value: unknown, record: TProduct) => record.inStock === value,
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_: unknown, record: TProduct) => (
+        <Space size="middle">
+          <Tooltip title="Edit">
+            <Button
+              type="link"
+              icon={<FaEdit className="text-blue-600" />}
+              onClick={() => handleEdit(record._id)}
+            />
+          </Tooltip>
+          <Tooltip title="Delete">
+            <Button
+              type="link"
+              icon={<FaTrash className="text-red-600" />}
+              onClick={() => handleDelete(record._id)}
+            />
+          </Tooltip>
+        </Space>
+      ),
+    },
+  ];
+
+  const handleEdit = (id?: string) => {
+    // TODO: Implement edit functionality
+    console.log("Edit product:", id);
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
+  const handleDelete = (id?: string) => {
+    // TODO: Implement delete functionality
+    console.log("Delete product:", id);
   };
 
   return (
@@ -124,13 +212,9 @@ const AllProducts = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="py-8">
-          <Title
-            title="All Products"
-            subtitle="Explore our exclusive collection of premium motorcycles"
-          />
+          <DashboardTitle title="Manage Products" subtitle="All Products" />
         </div>
 
-      
         <div className="bg-white rounded-xl shadow-sm mb-8">
           <div className="p-4 md:p-6 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="w-full md:w-auto flex-1 max-w-md">
@@ -170,7 +254,6 @@ const AllProducts = () => {
             </div>
           </div>
 
-         
           {activeFilters.length > 0 && (
             <div className="px-6 pb-4">
               <div className="flex flex-wrap gap-2">
@@ -189,59 +272,49 @@ const AllProducts = () => {
           )}
         </div>
 
-  
-        <AnimatePresence>
-          {isLoading || filterLoading ? (
-            <div className="flex justify-center items-center py-20">
-              <Spin
-                indicator={
-                  <LoadingOutlined
-                    style={{ fontSize: 48, color: "#f97316" }}
-                    spin
-                  />
-                }
-              />
-            </div>
-          ) : getAllProducts?.data?.length ? (
-            <motion.div
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            >
-              {getAllProducts.data.map((product: TProduct, idx: number) => (
-                <motion.div key={idx} variants={item}>
-                  <ProductCard
-                    name={product?.name}
-                    category={product?.category}
-                    brand={product?.brand}
-                    price={product?.price}
-                    inStock={product?.inStock}
-                    photoURL={product?.photo as string}
-                    url={`/products/${product?._id}`}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center justify-center py-20"
-            >
-              <Empty
-                description={
-                  <span className="text-gray-500">
-                    No products found matching your criteria
-                  </span>
-                }
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isLoading || filterLoading ? (
+          <div className="flex justify-center items-center py-20">
+            <Spin
+              indicator={
+                <LoadingOutlined
+                  style={{ fontSize: 48, color: "#f97316" }}
+                  spin
+                />
+              }
+            />
+          </div>
+        ) : getAllProducts?.data?.length ? (
+          <div className="bg-white rounded-xl shadow-sm">
+            <Table
+              columns={columns}
+              dataSource={getAllProducts.data}
+              rowKey="_id"
+              pagination={{
+                pageSize: 10,
+                showSizeChanger: true,
+                showTotal: (total) => `Total ${total} products`,
+              }}
+              className="w-full"
+            />
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center justify-center py-20"
+          >
+            <Empty
+              description={
+                <span className="text-gray-500">
+                  No products found matching your criteria
+                </span>
+              }
+            />
+          </motion.div>
+        )}
       </div>
     </div>
   );
 };
 
-export default AllProducts;
+export default ManageProducts;

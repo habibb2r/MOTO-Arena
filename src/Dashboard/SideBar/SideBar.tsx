@@ -46,7 +46,7 @@ const SideBar = () => {
         {
           name: "All Products",
           icon: SearchOutlined,
-          path: "/dashboard/admin/all-products",
+          path: "/dashboard/admin/products",
         },
       ],
     },

@@ -54,7 +54,16 @@ export const productApi = baseApi.injectEndpoints({
         },
       }),
     }),
+
+    addProduct: builder.mutation({
+      query: (newProduct) => ({
+        url: "api/products/create-product",
+        method: "POST",
+        body: newProduct,
+        
+      }),
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetSingleProductQuery, useAllbrandandcategoryQuery } = productApi;
+export const { useGetAllProductsQuery, useGetSingleProductQuery, useAllbrandandcategoryQuery, useAddProductMutation } = productApi;

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
-interface PhotoUploadProps {
+interface UploadPhotoProps {
   fileList: any;
   setFileList: (newFileList: any) => void;
 }
@@ -33,7 +34,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({ fileList, setFileList }) => {
             <img
               src={previewUrl}
               alt="Image Preview"
-              className="rounded-md  h-30 shadow-md"
+              className="rounded-md h-[150px] shadow-md"
             />
 
             <button
