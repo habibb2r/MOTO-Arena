@@ -16,6 +16,7 @@ import AdminProtection from "./AdminProtectedRoute";
 import CustomerProtectedRoute from "./CustomerProtectedRoute";
 import AddProduct from "../Dashboard/Admin/ProductManagement/AddProduct";
 import ManageProducts from "../Dashboard/Admin/ProductManagement/ManageProducts";
+import UserManagement from "../Dashboard/Admin/UserManagement";
 
 
 export const router = createBrowserRouter([
@@ -70,6 +71,7 @@ export const router = createBrowserRouter([
       { path: 'update', element: <AdminProtection> <UpdateProfile /></AdminProtection> },
       { path: "add-product", element: <AdminProtection><AddProduct /></AdminProtection> },
       { path: "products", element: <AdminProtection><ManageProducts /></AdminProtection> },
+      { path: "users", element: <AdminProtection><UserManagement /></AdminProtection> },
       // { path: "product/edit/:id", element: <AdminProtection><EditProduct /></AdminProtection> },
       // { path: "orders", element: <AdminProtection><OrderManage /></AdminProtection> }
     ]

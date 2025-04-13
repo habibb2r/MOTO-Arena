@@ -78,7 +78,7 @@ const AddProduct = () => {
 
   return (
     <div className="p-4 space-y-5">
-      <DashboardTitle title="Add Product" />
+      <DashboardTitle title="Add Product" subtitle="Add a new product" />
       <div>
        <Spin spinning={isLoading}>
        <Form
