@@ -37,14 +37,14 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateNameAndPhoto:builder.mutation({
       query:(payload)=>({
-        url:`api/auth/update/user`,
+        url:`api/user/update/user`,
         method:"PATCH",
         body:payload,
       })
     }),
     updatepassword:builder.mutation({
       query:(payload)=>({
-        url:`api/auth/update/password`,
+        url:`api/user/update/password`,
         method:"PATCH",
         body:payload,
       })

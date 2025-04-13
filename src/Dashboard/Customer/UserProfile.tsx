@@ -52,7 +52,7 @@ const Profile = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring" }}
-              className="absolute -bottom-16 left-1/2 transform -translate-x-1/2"
+              className="absolute -bottom-16 left-[45%] transform -translate-x-1/2"
             >
               <Avatar
                 size={120}

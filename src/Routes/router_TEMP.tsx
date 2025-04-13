@@ -12,6 +12,8 @@ import DashboardLayout from "../Dashboard/LayOuts/DashboardLayout";
 import UserProfile from "../Dashboard/Customer/UserProfile";
 import UpdateProfile from "../Dashboard/Customer/UpdateProfile";
 import MyOrders from "../Dashboard/Customer/MyOrders";
+import AdminProtection from "./AdminProtectedRoute";
+import CustomerProtectedRoute from "./CustomerProtectedRoute";
 
 
 export const router = createBrowserRouter([
@@ -48,12 +50,26 @@ export const router = createBrowserRouter([
     path: "/dashboard/customer",
     element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
     children: [
-      { index: true, element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
-      { path: '/dashboard/customer', element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
-      { path: 'my-orders', element: <ProtectedRoute> <MyOrders /></ProtectedRoute> },
-      { path: 'update', element: <ProtectedRoute> <UpdateProfile /></ProtectedRoute> },
+      { index: true, element: <CustomerProtectedRoute><UserProfile /></CustomerProtectedRoute> },
+      { path: '/dashboard/customer', element: <CustomerProtectedRoute><UserProfile /></CustomerProtectedRoute> },
+      { path: 'my-orders', element: <CustomerProtectedRoute> <MyOrders /></CustomerProtectedRoute> },
+      { path: 'update', element: <CustomerProtectedRoute> <UpdateProfile /></CustomerProtectedRoute> },
 
 
+    ]
+  },
+
+  {
+    path: "/dashboard/admin",
+    element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
+    children: [
+      { index: true, element: <AdminProtection> <UserProfile /></AdminProtection> },
+      { path: '/dashboard/admin', element: <AdminProtection> <UserProfile /></AdminProtection> },
+      { path: 'update', element: <AdminProtection> <UpdateProfile /></AdminProtection> },
+      // { path: "product/add", element: <AdminProtection><AddProduct /></AdminProtection> },
+      // { path: "products", element: <AdminProtection><ProductManagement /></AdminProtection> },
+      // { path: "product/edit/:id", element: <AdminProtection><EditProduct /></AdminProtection> },
+      // { path: "orders", element: <AdminProtection><OrderManage /></AdminProtection> }
     ]
   },
 ]);

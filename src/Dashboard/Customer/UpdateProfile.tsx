@@ -154,7 +154,7 @@ const UpdateProfile = () => {
       <div className="p-4 space-y-5 bg-white">
         <DashboardTitle title="Update Profile" />
         <div className="bg-white text-black shadow rounded-lg relative">
-          <Link to="/dashboard/customer" className="absolute top-0 right-0">
+          <Link to={`/dashboard/${user?.role}`} className="absolute top-0 right-0">
             <Button icon={<ArrowLeftOutlined />}></Button>
           </Link>
           <div className="shadow-md p-5">
