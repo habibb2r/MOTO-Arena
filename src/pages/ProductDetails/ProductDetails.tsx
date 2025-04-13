@@ -26,15 +26,15 @@ const ProductDetails = () => {
   } = useGetSingleProductQuery({ id: productIdDb?.id });
   console.log("singleProduct", singleProduct);
 
+  const productImages =
+    singleProduct?.data?.photoCollection?.filter(Boolean) ||
+    [
+      singleProduct?.data?.photo,
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
+      "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
+      "https://images.unsplash.com/photo-1558980664-769d59546b3d",
+    ].filter(Boolean);
 
-  const productImages = singleProduct?.data?.photoCollection?.filter(Boolean) || [
-    singleProduct?.data?.photo,
-    "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
-    "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
-    "https://images.unsplash.com/photo-1558980664-769d59546b3d",
-  ].filter(Boolean); 
-
- 
   useEffect(() => {
     if (singleProduct?.data?.photo) {
       setSelectedImage(singleProduct.data.photo);
@@ -95,7 +95,7 @@ const ProductDetails = () => {
 
             {/* Thumbnail Images */}
             <div className="grid grid-cols-4 gap-2">
-              {productImages.map((image, index) => (
+              {productImages.map((image: string, index: number) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(image)}
@@ -294,7 +294,8 @@ const ProductDetails = () => {
             >
               View all products
             </Button>,
-            <Link to={'/dashboard/customer/my-orders'}
+            <Link
+              to={"/dashboard/customer/my-orders"}
               className="border-green-600 text-green-600 hover:bg-green-50"
             >
               Give a review

@@ -1,4 +1,4 @@
-import { Avatar, Button, Spin } from "antd";
+import { Avatar, Spin } from "antd";
 import { EditOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
