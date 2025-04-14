@@ -40,6 +40,8 @@ const AllProducts = () => {
     minPrice: getminPrice,
   });
 
+  // console.log(import.meta.env.VITE_BACKEND_URL)
+  // console.log(import.meta.env.VITE_STRIPE_SECRET)
   console.log("getAllProducts", getAllProducts);
 
   const { data: allbrandandcategory, isLoading: filterLoading } =

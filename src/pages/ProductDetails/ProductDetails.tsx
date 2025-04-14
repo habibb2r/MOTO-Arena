@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useAppSelector } from "../../redux/hooks";
 import { useGetSingleProductQuery } from "../../redux/features/products/productApi";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const productIdDb = useParams();
@@ -42,7 +43,12 @@ const ProductDetails = () => {
   }, [singleProduct]);
 
   const handleBooking = () => {
-    setOpenResponsive(!openResponsive);
+    if(user?.role === "admin"){
+      return toast.error("Admin cannot purchase product");
+    }else{
+      setOpenResponsive(!openResponsive);
+    }
+   
   };
 
   if (isLoading || !singleProduct) {
@@ -207,7 +213,7 @@ const ProductDetails = () => {
                     onClick={handleBooking}
                     disabled={
                       !singleProduct?.data?.inStock ||
-                      singleProduct?.data?.quantity < 1
+                      singleProduct?.data?.quantity < 1 
                     }
                     className="bg-green-600 hover:bg-green-700 h-full py-2 px-8 text-lg"
                   >
@@ -288,13 +294,13 @@ const ProductDetails = () => {
           subTitle="Thank you for your purchase! Track order in your dashboard"
           extra={[
             <Link to={"/products"} 
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700 px-3 py-2 text-white rounded-md"
             >
               View all products
             </Link>,
             <Link
               to={"/dashboard/customer/my-orders"}
-              className="border-green-600 text-green-600 hover:bg-green-50"
+              className="border-green-600 text-orange-600 hover:bg-green-50 px-3 py-2 rounded-md"
             >
               Track Order
             </Link>,

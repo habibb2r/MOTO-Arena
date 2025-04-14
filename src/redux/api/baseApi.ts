@@ -4,9 +4,9 @@ import { RootState } from "../store";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  tagTypes: ["Products"],
+  tagTypes: ["Products", "Orders"],
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:5000/`,
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}`,
     prepareHeaders: (
       headers: Headers,
       { getState }: { getState: Function }

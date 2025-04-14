@@ -1,30 +1,50 @@
-// // src/redux/features/products/productApi.ts
-// import { baseApi } from '../../api/baseApi';
-// import { TProduct } from '../../types/product';
+import {  createSlice } from "@reduxjs/toolkit";
 
-// export const productApi = baseApi.injectEndpoints({
-//   endpoints: (builder) => ({
-//     getAllProducts: builder.query<{
-//       data: TProduct[];
-//       meta?: {
-//         total: number;
-//         limit: number;
-//         page: number;
-//       };
-//     }, Record<string, any>>({
-//       query: (params) => ({
-//         url: '/products',
-//         method: 'GET',
-//         params,
-//       }),
-//       providesTags: ['Product'],
-//     }),
+export interface TProduct {
+  _id?: string;
+  name: string;
+  category: string;
+  brand: string;
+  price: number;
+  description: string;
+  inStock: boolean;
+  photo: string;
+}
+export interface TSearch {
+  searchTerm: string;
+  minPrice: number;
+  maxPrice: number;
+  category: string;
+  brand: string;
+}
 
-//     getSingleProduct: builder.query<TProduct, string>({
-//       query: (id) => `/products/${id}`,
-//       providesTags: (result, error, id) => [{ type: 'Product', id }],
-//     }),
-//   }),
-// });
+interface ProductsState {
+  products: TProduct[];
+  search: TSearch;  
+  loading: boolean;
+  error: string | null;
+}
 
-// export const { useGetAllProductsQuery, useGetSingleProductQuery } = productApi;
+const initialState: ProductsState = {
+  products: [],
+  search:{
+    searchTerm: "",
+    minPrice: 0,
+    maxPrice: Infinity,
+    category: "",
+    brand: "",
+  },
+  loading: false,
+  error: null,
+};
+
+const productsSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {},
+ 
+});
+
+
+
+export default productsSlice.reducer;
