@@ -66,7 +66,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <div className="pt-[2%] bg-gray-50">
+    <div className=" bg-gray-50">
       <Title
         title="About Moto Arena"
         subtitle="Experience Excellence in Two Wheels"

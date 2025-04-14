@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-[100vh] overflow-hidden mt-[-3.5%]">
+    <div className="relative w-full h-[100vh] overflow-hidden mt-[-5rem]">
       <video
         autoPlay
         loop

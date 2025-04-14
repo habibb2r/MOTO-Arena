@@ -114,7 +114,7 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 md:px-6 lg:px-8 pb-12">
+    <div className=" bg-gray-50 px-4 md:px-6 lg:px-8 pb-12">
       <FilterModal
         open={openFilter}
         setOpen={setOpenFilter}
