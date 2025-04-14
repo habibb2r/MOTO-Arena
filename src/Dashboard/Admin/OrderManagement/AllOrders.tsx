@@ -34,7 +34,7 @@ const AllOrders = () => {
   const { data: allOrders, isLoading } = useGetAllOrdersQuery({});
 
   const orders = allOrders?.data || [];
-  console.log("orders", orders);
+//   console.log("orders", orders);
   const getStatusColor = (index: number) => {
     const statusColors: Record<number, string> = {
       0: "gold",

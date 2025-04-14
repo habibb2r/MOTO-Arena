@@ -25,7 +25,7 @@ const ProductDetails = () => {
     isLoading,
     refetch,
   } = useGetSingleProductQuery({ id: productIdDb?.id });
-  console.log("singleProduct", singleProduct);
+  // console.log("singleProduct", singleProduct);
 
   const productImages =
     singleProduct?.data?.photoCollection?.filter(Boolean) ||

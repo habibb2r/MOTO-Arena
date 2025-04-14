@@ -20,7 +20,7 @@ interface User {
 const UserManagement = () => {
   const { data: getAllUsers, isLoading } = useGetAllUserQuery({});
   const users = getAllUsers?.data || [];
-  console.log("users", users);
+  // console.log("users", users);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

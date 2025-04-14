@@ -41,7 +41,7 @@ const PendingOrders = () => {
   const orders =
     allOrders?.data.filter((order: Order) => order.orderActiveTrack !== 3) ||
     [];
-  console.log("orders", orders);
+//   console.log("orders", orders);
   const getStatusColor = (index: number) => {
     const statusColors: Record<number, string> = {
       0: "gold",
@@ -67,7 +67,7 @@ const PendingOrders = () => {
   const handleStatusChange = async (orderId: string, newStatus: number) => {
     try {
       await updateOrderStatus({ id: orderId, trackId: newStatus }).unwrap();
-    console.log(orderId, newStatus);
+    // console.log(orderId, newStatus);
       message.success("Order status updated successfully");
     } catch (error) {
       message.error("Failed to update order status");

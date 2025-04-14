@@ -72,7 +72,7 @@ const Login = () => {
       navigate("/");
     } catch (error: unknown) {
       const apiError = error as ApiError;
-      console.log("error =>", apiError);
+      // console.log("error =>", apiError);
       toast.error(apiError?.data?.message || "Login failed", {
         duration: 2000,
       });

@@ -26,7 +26,7 @@ const Profile = () => {
     user ? { email: user.email } : skipToken
   );
   const singleCustomer = (data as ApiResponse)?.data;
-  console.log("singleCustomer", singleCustomer);
+  // console.log("singleCustomer", singleCustomer);
   if (!user) {
     return null;
   }

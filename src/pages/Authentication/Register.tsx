@@ -82,7 +82,7 @@ const Register = () => {
       }
     } catch (error: unknown) {
       const apiError = error as { data?: { message: string } };
-      console.log("error =>", apiError);
+      // console.log("error =>", apiError);
       toast.error(apiError?.data?.message || "Registration failed", {
         duration: 2000,
       });
