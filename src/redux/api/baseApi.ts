@@ -4,17 +4,21 @@ import { RootState } from "../store";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
+  tagTypes: ["Products"],
   baseQuery: fetchBaseQuery({
     baseUrl: `http://localhost:5000/`,
-    prepareHeaders: (headers: Headers, { getState }: { getState: Function }) => {
+    prepareHeaders: (
+      headers: Headers,
+      { getState }: { getState: Function }
+    ) => {
       const token = (getState() as RootState).auth.token;
 
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set("authorization", `Bearer ${token}`);
       }
 
       return headers;
     },
   }),
-  endpoints: ()=> ({}),
+  endpoints: () => ({}),
 });

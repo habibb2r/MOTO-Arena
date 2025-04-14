@@ -36,6 +36,7 @@ export const productApi = baseApi.injectEndpoints({
           inStock,
         },
       }),
+      providesTags: ["Products"],
     }),
 
     getSingleProduct: builder.query<any, { id: any }>({
@@ -43,11 +44,14 @@ export const productApi = baseApi.injectEndpoints({
         url: `api/products/${id}`,
         method: "GET",
       }),
+      providesTags: (_result, _error, arg) => [
+        { type: "Products", id: arg.id },
+      ],
     }),
 
     allbrandandcategory: builder.query({
       query: () => ({
-        url: 'api/products/category-and-brand',
+        url: "api/products/category-and-brand",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,18 +64,24 @@ export const productApi = baseApi.injectEndpoints({
         url: "api/products/create-product",
         method: "POST",
         body: newProduct,
-        
       }),
+      invalidatesTags: ["Products"],
     }),
 
     deleteProduct: builder.mutation<any, string>({
       query: (productId) => ({
-        url: `api/products/${productId}`,
+        url: `api/products/delete/${productId}`,
         method: "DELETE",
       }),
-      
+      invalidatesTags: ["Products"],
     }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetSingleProductQuery, useAllbrandandcategoryQuery, useAddProductMutation, useDeleteProductMutation } = productApi;
+export const {
+  useGetAllProductsQuery,
+  useGetSingleProductQuery,
+  useAllbrandandcategoryQuery,
+  useAddProductMutation,
+  useDeleteProductMutation,
+} = productApi;
