@@ -10,6 +10,7 @@ import { Divider, Drawer, Tooltip } from "antd";
 import { useState } from "react";
 import "./nav.css";
 import { toast } from "sonner";
+import { AppstoreOutlined } from "@ant-design/icons";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -75,14 +76,11 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex gap-4 items-center">
-            <Tooltip placement="bottom" title={`No User`}>
-              <img
-                className="w-10 h-10 shadow-xl shadow-green-500 rounded-full forPc"
-                src={user?.photoURL}
-                alt=""
-              />
-            </Tooltip>
-            <Link to={"/login"}>
+            <AppstoreOutlined
+              onClick={showDrawer}
+              className="text-4xl text-orange-600 block lg:hidden"
+            />
+            <Link to={"/login"} className="hidden lg:block">
               <button
                 className="px-3 py-2 md:px-8 md:py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full 
                         font-semibold shadow-lg hover:shadow-orange-500/20 transition-all duration-300"
@@ -114,6 +112,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
+
             <Divider></Divider>
           </ul>
 
@@ -125,13 +124,25 @@ const Navbar = () => {
             Dashboard
           </Link>
           <Divider></Divider>
-          <button
-            onClick={() => handleLogout()}
-            className="px-8 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full 
+
+          {isLogin ? (
+            <button
+              onClick={() => handleLogout()}
+              className="px-8 py-3 bg-red-500 hover:bg-red-600 text-white rounded-full 
                         font-semibold shadow-lg hover:shadow-orange-500/20 transition-all duration-300"
-          >
-            Logout
-          </button>
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to={"/login"} >
+              <button onClick={() => setOpen(!open)}
+                className="px-8 py-3 md:px-8 md:py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full 
+                      font-semibold shadow-lg hover:shadow-orange-500/20 transition-all duration-300"
+              >
+                Login
+              </button>
+            </Link>
+          )}
         </Drawer>
       </div>
     </nav>
