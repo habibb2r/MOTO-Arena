@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Spin, Empty, Table, Button, Space, Tooltip } from "antd";
+import { Spin, Empty, Table, Button, Space, Tooltip, Modal } from "antd";
 import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 import { FaFilter, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   useAllbrandandcategoryQuery,
+  useDeleteProductMutation,
   useGetAllProductsQuery,
 } from "../../../redux/features/products/productApi";
 import { FilterModal } from "../../../components/modalFilter/Filtermodal";
@@ -21,6 +23,7 @@ interface FilterValues {
 }
 
 const ManageProducts = () => {
+  const navigate = useNavigate();
   const [openFilter, setOpenFilter] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [getminPrice, setMinPrice] = useState(0);
@@ -29,6 +32,8 @@ const ManageProducts = () => {
   const [getbrand, setBrand] = useState("");
   const [available, setAvailable] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<string | undefined>();
 
   const { data: getAllProducts, isLoading } = useGetAllProductsQuery({
     inStock: available,
@@ -41,6 +46,7 @@ const ManageProducts = () => {
 
   const { data: allbrandandcategory, isLoading: filterLoading } =
     useAllbrandandcategoryQuery({});
+  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
 
   const allBrand = allbrandandcategory?.data[0]?.brands;
   const allCategory = allbrandandcategory?.data[0]?.categories;
@@ -178,11 +184,12 @@ const ManageProducts = () => {
             />
           </Tooltip>
           <Tooltip title="Delete">
-            <Button
-              type="link"
-              icon={<FaTrash className="text-red-600" />}
-              onClick={() => handleDelete(record._id)}
-            />
+            <button>
+              <FaTrash
+                className="text-red-600 cursor-pointer text-xl"
+                onClick={() => handleDelete(record._id)}
+              />
+            </button>
           </Tooltip>
         </Space>
       ),
@@ -190,13 +197,32 @@ const ManageProducts = () => {
   ];
 
   const handleEdit = (id?: string) => {
-    // TODO: Implement edit functionality
-    console.log("Edit product:", id);
+    if (id) {
+      navigate(`/dashboard/admin/edit-product/${id}`);
+    }
   };
 
   const handleDelete = (id?: string) => {
-    // TODO: Implement delete functionality
-    console.log("Delete product:", id);
+    if (!id) return;
+    setProductToDelete(id);
+    setDeleteModalVisible(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!productToDelete) return;
+
+    try {
+      await deleteProduct(productToDelete).unwrap();
+      toast.success("Product deleted successfully");
+      setDeleteModalVisible(false);
+    } catch {
+      toast.error("Failed to delete product");
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteModalVisible(false);
+    setProductToDelete(undefined);
   };
 
   return (
@@ -209,6 +235,24 @@ const ManageProducts = () => {
         brands={brandArray}
         handleFillterFailed={handleFillterFailed}
       />
+
+      <Modal
+        title="Confirm Delete"
+        open={deleteModalVisible}
+        onOk={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        okText="Yes, Delete"
+        cancelText="No, Cancel"
+        okButtonProps={{
+          loading: isDeleting,
+          danger: true,
+        }}
+      >
+        <p>
+          Are you sure you want to delete this product? This action cannot be
+          undone.
+        </p>
+      </Modal>
 
       <div className="max-w-7xl mx-auto">
         <div className="py-8">
@@ -286,6 +330,7 @@ const ManageProducts = () => {
         ) : getAllProducts?.data?.length ? (
           <div className="bg-white rounded-xl shadow-sm">
             <Table
+              loading={isLoading || isDeleting}
               columns={columns}
               dataSource={getAllProducts.data}
               rowKey="_id"

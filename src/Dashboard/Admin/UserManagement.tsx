@@ -1,7 +1,7 @@
-import { Table, Button, Space, Avatar, Tag, Tooltip } from 'antd';
-import { useState } from 'react';
-import { FaBan, FaCheckCircle } from 'react-icons/fa';
-import DashboardTitle from '../LayOuts/DashboardTitle';
+import { Table, Button, Space, Avatar, Tag, Tooltip } from "antd";
+import { FaBan, FaCheckCircle } from "react-icons/fa";
+import DashboardTitle from "../LayOuts/DashboardTitle";
+import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
 
 interface User {
   _id: {
@@ -13,51 +13,38 @@ interface User {
   isBlocked: boolean;
   isActive: boolean;
   photoURL: string;
-  createdAt: {
-    $date: string;
-  };
-  updatedAt: {
-    $date: string;
-  };
+  createdAt: string;
+  updatedAt: string;
 }
 
 const UserManagement = () => {
-  // Mock data for demonstration
-  const [users] = useState<User[]>([
-    {
-      _id: { $oid: "67fadb1e159f66a70dace684" },
-      name: "Yo Soy De Habib",
-      email: "testuser@mail.usm",
-      role: "admin",
-      isBlocked: false,
-      isActive: true,
-      photoURL: "https://res.cloudinary.com/dairs3nkn/image/upload/v1744097456/habibb2r/zuoz1s1iqhzf8t0ioylo.jpg",
-      createdAt: { $date: "2025-04-12T21:29:02.141Z" },
-      updatedAt: { $date: "2025-04-13T18:18:42.322Z" }
-    },
-    {
-      _id: { $oid: "67fadb1e159f66a70dace685" },
-      name: "John Doe",
-      email: "john@example.com",
-      role: "user",
-      isBlocked: true,
-      isActive: true,
-      photoURL: "https://res.cloudinary.com/dairs3nkn/image/upload/v1744097456/default-avatar.jpg",
-      createdAt: { $date: "2025-04-10T15:00:00.000Z" },
-      updatedAt: { $date: "2025-04-13T16:30:00.000Z" }
-    },
-  ]);
+  const { data: getAllUsers, isLoading } = useGetAllUserQuery({});
+  const users = getAllUsers?.data || [];
+  console.log("users", users);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return "N/A";
+    }
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
   const handleToggleBlock = (userId: string, currentStatus: boolean) => {
-    console.log(`Toggling block status for user ${userId} to ${!currentStatus}`);
-    // Here you would typically make an API call to update the user's blocked status
+    console.log(
+      `Toggling block status for user ${userId} to ${!currentStatus}`
+    );
   };
 
   const columns = [
     {
-      title: 'User',
-      dataIndex: 'name',
-      key: 'name',
+      title: "User",
+      dataIndex: "name",
+      key: "name",
       render: (name: string, record: User) => (
         <Space>
           <Avatar src={record.photoURL} />
@@ -69,50 +56,58 @@ const UserManagement = () => {
       ),
     },
     {
-      title: 'Role',
-      dataIndex: 'role',
-      key: 'role',
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
       render: (role: string) => (
-        <Tag color={role === 'admin' ? 'blue' : 'green'}>
+        <Tag color={role === "admin" ? "blue" : "green"}>
           {role.toUpperCase()}
         </Tag>
       ),
     },
     {
-      title: 'Status',
-      dataIndex: 'isActive',
-      key: 'status',
+      title: "Status",
+      dataIndex: "isActive",
+      key: "status",
       render: (isActive: boolean, record: User) => (
         <Space>
           {record.isBlocked ? (
             <Tag color="red">Blocked</Tag>
           ) : (
-            <Tag color={isActive ? 'success' : 'warning'}>
-              {isActive ? 'Active' : 'Inactive'}
+            <Tag color={isActive ? "success" : "warning"}>
+              {isActive ? "Active" : "Inactive"}
             </Tag>
           )}
         </Space>
       ),
     },
     {
-      title: 'Joined',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (date: { $date: string }) => (
-        <span>{new Date(date.$date).toLocaleDateString()}</span>
-      ),
+      title: "Joined",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (dateString: string) => <span>{formatDate(dateString)}</span>,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       render: (_: unknown, record: User) => (
         <Space>
-          <Tooltip title={record.isBlocked ? 'Unblock User' : 'Block User'}>
+          <Tooltip title={record.isBlocked ? "Unblock User" : "Block User"}>
             <Button
               type="link"
-              icon={record.isBlocked ? <FaCheckCircle className="text-green-600" /> : <FaBan className="text-red-600" />}
-              onClick={() => handleToggleBlock(record._id.$oid, record.isBlocked)}
-              className={record.isBlocked ? 'hover:text-green-700' : 'hover:text-red-700'}
+              icon={
+                record.isBlocked ? (
+                  <FaCheckCircle className="text-green-600" />
+                ) : (
+                  <FaBan className="text-red-600" />
+                )
+              }
+              onClick={() =>
+                handleToggleBlock(record._id.$oid, record.isBlocked)
+              }
+              className={
+                record.isBlocked ? "hover:text-green-700" : "hover:text-red-700"
+              }
             />
           </Tooltip>
         </Space>
@@ -129,6 +124,7 @@ const UserManagement = () => {
 
         <div className="bg-white rounded-xl shadow-sm">
           <Table
+            loading={isLoading}
             columns={columns}
             dataSource={users}
             rowKey={(record) => record._id.$oid}

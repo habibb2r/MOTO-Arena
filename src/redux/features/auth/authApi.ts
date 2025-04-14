@@ -18,7 +18,7 @@ const authApi = baseApi.injectEndpoints({
     }),
     getAllUser:builder.query({
       query: () => ({
-        url: "api/auth/all",
+        url: "api/user/all",
         method: "GET",
       }),
     }),
