@@ -57,7 +57,7 @@ const SideBar = () => {
         {
           name: "All Orders",
           icon: ShoppingCartOutlined,
-          path: "/dashboard/admin/all-orders",
+          path: "/dashboard/admin/orders",
         },
         {
           name: "Pending Orders",
@@ -73,12 +73,12 @@ const SideBar = () => {
     {
       name: "My Profile",
       icon: UserOutlined,
-      path: "/dashboard/profile",
+      path: "/dashboard/customer",
     },
     {
       name: "My Orders",
       icon: ShoppingCartOutlined,
-      path: "/dashboard/my-orders",
+      path: "/dashboard/customer/my-orders",
     },
   ];
 

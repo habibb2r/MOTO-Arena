@@ -287,18 +287,16 @@ const ProductDetails = () => {
           title="Payment Successfully"
           subTitle="Thank you for your purchase! Track order in your dashboard"
           extra={[
-            <Button
-              type="primary"
-              key="console"
+            <Link to={"/products"} 
               className="bg-green-600 hover:bg-green-700"
             >
               View all products
-            </Button>,
+            </Link>,
             <Link
               to={"/dashboard/customer/my-orders"}
               className="border-green-600 text-green-600 hover:bg-green-50"
             >
-              Give a review
+              Track Order
             </Link>,
           ]}
         />

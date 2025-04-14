@@ -19,7 +19,7 @@ interface FilterValues {
   maxPrice?: number;
   brand?: string;
   model?: string;
-  isAvailable?: boolean;
+  inStock?: boolean;
 }
 
 const ManageProducts = () => {
@@ -65,7 +65,7 @@ const ManageProducts = () => {
     setMaxPrice(value?.maxPrice || Infinity);
     setCategory(value?.model || "");
     setBrand(value?.brand || "");
-    setAvailable(value?.isAvailable ?? true);
+    setAvailable(value?.inStock ?? true);
     toast.success("Filters applied successfully");
   };
 
@@ -179,7 +179,7 @@ const ManageProducts = () => {
           <Tooltip title="Edit">
             <Button
               type="link"
-              icon={<FaEdit className="text-blue-600" />}
+              icon={<FaEdit className="text-blue-600 text-xl" />}
               onClick={() => handleEdit(record._id)}
             />
           </Tooltip>

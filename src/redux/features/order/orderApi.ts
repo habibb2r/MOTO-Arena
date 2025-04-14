@@ -13,7 +13,7 @@ const orderApi = baseApi.injectEndpoints({
       }),
     getAllOrders: builder.query({
         query: () => ({
-          url: `api/order/get-all`,
+          url: `api/orders/allorders`,
           method: "GET",
        
         }),
@@ -24,10 +24,11 @@ const orderApi = baseApi.injectEndpoints({
           method: "POST",
           body: Orderdoc,
         }),
+        invalidatesTags: ["Products"]
       }),
       updateOrderStatus:builder.mutation<any, {id:string;trackId:any}>({
         query: (Orderdoc) => ({
-          url: `api/order/update`,
+          url: `api/orders/update`,
           method: "PATCH",
           body: Orderdoc,
         }),
