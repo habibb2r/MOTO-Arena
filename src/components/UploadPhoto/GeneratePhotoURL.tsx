@@ -2,10 +2,10 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const GeneratePhotoURL = async (image: File) => {
-    if(!image?.name){
-        toast.error("Please provide an image");
-        return null;
-    }
+  if (!image?.name) {
+    toast.error("Please provide an image");
+    return null;
+  }
   try {
     const newFormData = new FormData();
     newFormData.append("file", image);
@@ -21,9 +21,12 @@ const GeneratePhotoURL = async (image: File) => {
         },
       }
     );
-    const imageUrl = response.data.url;
+
+    console.log(response.data)
+    const imageUrl = response.data.secure_url;
+    console.log("Image URL:", imageUrl);
     return imageUrl;
-  } catch (error) {
+  } catch {
     toast.error("Failed to upload image");
     return null;
   }

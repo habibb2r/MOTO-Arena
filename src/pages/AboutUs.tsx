@@ -8,6 +8,10 @@ import {
   TrophyOutlined,
   TeamOutlined,
   SafetyOutlined,
+  GithubOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+  FacebookOutlined,
 } from "@ant-design/icons";
 import { Form, Input } from "antd";
 import { toast } from "sonner";
@@ -19,62 +23,86 @@ export default function AboutUs() {
 
   const features = [
     {
-      icon: <TrophyOutlined className="text-4xl text-red-800" />,
-      title: "Premium Quality",
+      icon: <TrophyOutlined className="text-4xl text-orange-500" />,
+      title: "Premium Selection",
       description:
-        "We source only the finest motorcycles from renowned manufacturers worldwide.",
+        "Curated collection of high-performance motorcycles from world-class manufacturers.",
     },
     {
-      icon: <TeamOutlined className="text-4xl text-red-800" />,
-      title: "Expert Team",
+      icon: <TeamOutlined className="text-4xl text-orange-500" />,
+      title: "Expert Support",
       description:
-        "Our passionate team of motorcycle enthusiasts provides expert guidance and support.",
+        "Our dedicated team of motorcycle specialists ensures an unmatched buying experience.",
     },
     {
-      icon: <SafetyOutlined className="text-4xl text-red-800" />,
-      title: "Safety First",
+      icon: <SafetyOutlined className="text-4xl text-orange-500" />,
+      title: "Quality Assured",
       description:
-        "All our bikes undergo rigorous safety checks and maintenance inspections.",
+        "Every motorcycle undergoes comprehensive quality checks and certification process.",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <GithubOutlined />,
+      url: "https://github.com/habibb2r",
+      label: "GitHub",
+    },
+    {
+      icon: <LinkedinOutlined />,
+      url: "https://linkedin.com/in/habibb2r",
+      label: "LinkedIn",
+    },
+    {
+      icon: <TwitterOutlined />,
+      url: "https://twitter.com/habibb2r",
+      label: "Twitter",
+    },
+    {
+      icon: <FacebookOutlined />,
+      url: "https://facebook.com/habibb2r",
+      label: "Facebook",
     },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="pt-[2%] bg-gray-50">
       <Title
-        title="About Us"
-        subtitle="Learn more about Moto Arena"
+        title="About Moto Arena"
+        subtitle="Experience Excellence in Two Wheels"
         variant="gradient"
       />
 
-      {/* Hero Section */}
+    
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col md:flex-row justify-center items-center gap-8 px-4 md:px-8 py-12"
+        className="flex flex-col md:flex-row justify-center items-center gap-8 px-4 md:px-8 py-12 bg-white shadow-sm"
       >
-        <div className="md:w-1/2 text-center md:text-left space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-500 to-violet-700 bg-clip-text text-transparent">
-            Welcome to Moto Arena Family
+        <div className=" text-center md:text-left space-y-6">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+            Ride with Confidence
           </h1>
           <p className="text-xl md:text-2xl text-gray-700">
-            Your trusted destination for premium bikes & accessories since 2010.
+            Your premier destination for exceptional motorcycles and <br />
+            unparalleled service since 2010.
           </p>
         </div>
         <motion.div
-          className="md:w-1/2"
+          className=""
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
           <img
             src={banner}
             alt="Moto Arena Showroom"
-            className="rounded-2xl shadow-2xl"
+            className="rounded-2xl shadow-2xl h-[350px]"
           />
         </motion.div>
       </motion.div>
 
       {/* Features Section */}
-      <div className="bg-gray-50 py-16">
+      <div className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
@@ -84,7 +112,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-orange-100"
               >
                 <div className="flex flex-col items-center text-center space-y-4">
                   {feature.icon}
@@ -99,98 +127,96 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* About Section */}
-      <section className="py-16 px-4">
+    
+      <section className="py-16 px-4 bg-white">
         <div className="max-w-5xl mx-auto space-y-12">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl overflow-hidden"
+            className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-xl overflow-hidden"
           >
             <div className="p-8 space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-800 text-center">
-                Our Story
+                Our Journey
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-lg">
-                  Founded in 2010, Moto Arena has grown from a small local shop
-                  to one of the region's premier motorcycle dealerships. Our
-                  journey began with a simple vision: to provide motorcycle
-                  enthusiasts with not just bikes, but an entire riding
-                  experience.
+                  Moto Arena represents a revolution in the motorcycle retail
+                  industry. Established with the vision to provide motorcycle
+                  enthusiasts with an exceptional buying experience, we've grown
+                  to become a trusted name in the industry.
                 </p>
                 <p className="text-lg">
-                  We pride ourselves on our extensive collection of motorcycles,
-                  ranging from powerful sports bikes to comfortable cruisers and
-                  versatile adventure bikes. Our inventory includes renowned
-                  brands like Honda, Yamaha, Kawasaki, BMW, and Ducati.
+                  Our collection features carefully selected motorcycles from
+                  prestigious manufacturers worldwide. From high-performance
+                  sports bikes to comfortable cruisers and versatile adventure
+                  bikes, we offer something for every rider.
                 </p>
                 <p className="text-lg">
-                  What sets us apart is our commitment to customer satisfaction.
-                  We don't just sell motorcycles; we build relationships. Our
-                  team of experienced professionals is dedicated to helping you
-                  find the perfect bike that matches your riding style and
-                  preferences.
+                  What truly sets us apart is our dedication to customer
+                  satisfaction and our deep understanding of the riding
+                  community. Our team consists of passionate riders who share
+                  your enthusiasm for two-wheeled adventures.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Services Section */}
+         
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="grid md:grid-cols-2 gap-8"
           >
-            <div className="bg-white p-8 rounded-2xl shadow-xl">
+            <div className="bg-white p-8 rounded-2xl shadow-xl border border-orange-100">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                Our Services
+                Premium Services
               </h3>
               <ul className="space-y-4 text-gray-600">
                 <li className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  New and Pre-owned Motorcycle Sales
+                  Premium Motorcycle Sales & Leasing
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Professional Maintenance & Repairs
+                  Expert Maintenance & Custom Modifications
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Genuine Parts & Accessories
+                  Original Parts & Premium Accessories
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Custom Bike Modifications
+                  Flexible Financing Solutions
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Financing Options Available
+                  Professional Riding Consultation
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl">
+            <div className="bg-white p-8 rounded-2xl shadow-xl border border-orange-100">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                Visit Us
+                Visit Our Showroom
               </h3>
               <div className="space-y-4 text-gray-600">
                 <div className="flex items-center gap-4">
-                  <EnvironmentOutlined className="text-2xl text-red-800" />
-                  <p>123 Bike Street, Motorcycle City, MC 12345</p>
+                  <EnvironmentOutlined className="text-2xl text-orange-500" />
+                  <p>789 Motorcycle Boulevard, Racing City, MC 54321</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <PhoneOutlined className="text-2xl text-red-800" />
-                  <p>+1 (555) 123-4567</p>
+                  <PhoneOutlined className="text-2xl text-orange-500" />
+                  <p>+1 (555) 987-6543</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <ClockCircleOutlined className="text-2xl text-red-800" />
+                  <ClockCircleOutlined className="text-2xl text-orange-500" />
                   <div>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p>Saturday: 10:00 AM - 4:00 PM</p>
-                    <p>Sunday: Closed</p>
+                    <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+                    <p>Saturday: 10:00 AM - 5:00 PM</p>
+                    <p>Sunday: By Appointment</p>
                   </div>
                 </div>
               </div>
@@ -199,12 +225,46 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* Developer Section */}
+      <section className="py-12 px-4 bg-gradient-to-br from-orange-50 to-red-50">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <h2 className="text-3xl font-bold text-gray-800">
+              Developed By HABIBB2R
+            </h2>
+            <p className="text-gray-600">
+              Passionate about creating exceptional digital experiences
+            </p>
+            <div className="flex justify-center gap-6">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl text-orange-500 hover:text-orange-600 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  title={link.label}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <Title
             title="Get In Touch"
-            subtitle="We'd love to hear from you"
+            subtitle="Let's discuss your motorcycle dreams"
             variant="outlined"
           />
 
@@ -218,7 +278,7 @@ export default function AboutUs() {
               name="contact"
               onFinish={onFinish}
               layout="vertical"
-              className="space-y-6"
+              className="space-y-6 bg-white p-8 rounded-2xl shadow-xl border border-orange-100"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Form.Item
@@ -253,7 +313,7 @@ export default function AboutUs() {
                 ]}
               >
                 <Input.TextArea
-                  placeholder="Your Message"
+                  placeholder="Tell us about your motorcycle interests..."
                   rows={5}
                   className="p-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 hover:border-orange-500 transition-colors"
                 />

@@ -9,9 +9,9 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { RingLoader } from "react-spinners";
-import axios from "axios";
 import { useSignupMutation } from "../../redux/features/auth/authApi";
 import { motion } from "framer-motion";
+import GeneratePhotoURL from "../../components/UploadPhoto/GeneratePhotoURL";
 
 interface RegisterFormValues {
   name: string;
@@ -48,27 +48,13 @@ const Register = () => {
     try {
       setLoading(true);
       const image = data.image[0];
-      const newFormData = new FormData();
-      newFormData.append("file", image);
-      newFormData.append("upload_preset", "cfzfnkte");
-      newFormData.append("cloud_name", "dairs3nkn");
-
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dairs3nkn/image/upload",
-        newFormData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      const imageUrl = response.data.url;
+      const imageUrl = await GeneratePhotoURL(image)
       const userInfo = {
         ...data,
-        imageUrl,
+        photoURL : imageUrl,
       };
 
+      console.log("userInfo", userInfo);
       const result = (await registerUser(
         userInfo
       ).unwrap()) as RegisterResponse;
