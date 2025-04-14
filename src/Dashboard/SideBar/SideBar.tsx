@@ -4,7 +4,6 @@ import {
   UserOutlined,
   ShoppingCartOutlined,
   TeamOutlined,
-  AppstoreAddOutlined,
   FileAddOutlined,
   SearchOutlined,
   SolutionOutlined,

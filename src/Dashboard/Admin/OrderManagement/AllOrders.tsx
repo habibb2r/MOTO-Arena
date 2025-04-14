@@ -33,7 +33,7 @@ interface Order {
 const AllOrders = () => {
   const { data: allOrders, isLoading } = useGetAllOrdersQuery({});
 
-  const orders = allOrders?.data || [];
+//   const orders = allOrders?.data || [];
 //   console.log("orders", orders);
   const getStatusColor = (index: number) => {
     const statusColors: Record<number, string> = {
