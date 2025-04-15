@@ -6,14 +6,16 @@ const GeneratePhotoURL = async (image: File) => {
     toast.error("Please provide an image");
     return null;
   }
+  const preset = import.meta.env.VITE_PRESET
+  const cloud = import.meta.env.VITE_CLOUD_NAME
   try {
     const newFormData = new FormData();
     newFormData.append("file", image);
-    newFormData.append("upload_preset", "cfzfnkte");
-    newFormData.append("cloud_name", "dairs3nkn");
+    newFormData.append("upload_preset", preset);
+    newFormData.append("cloud_name", cloud);
 
     const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/dairs3nkn/image/upload",
+      `${import.meta.env.VITE_IMAGE_UPLOAD_URL}`,
       newFormData,
       {
         headers: {

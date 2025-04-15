@@ -6,7 +6,7 @@ import {
   logout,
   useCurrentUser,
 } from "../redux/features/auth/authSlice";
-import { Divider, Drawer, Tooltip } from "antd";
+import { Divider, Drawer } from "antd";
 import { useState } from "react";
 import "./nav.css";
 import { toast } from "sonner";
@@ -116,13 +116,15 @@ const Navbar = () => {
             <Divider></Divider>
           </ul>
 
-          <Link
-            onClick={() => setOpen(!open)}
-            className="px-[10%] py-2 border-x-2 border-orange-500  transition-all duration-300 rounded-2xl font-semibold w-full"
-            to={`/dashboard/${user?.role}`}
-          >
-            Dashboard
-          </Link>
+         {
+          isLogin?  <Link
+          onClick={() => setOpen(!open)}
+          className="px-[10%] py-2 border-x-2 border-orange-500  transition-all duration-300 rounded-2xl font-semibold w-full"
+          to={`/dashboard/${user?.role}`}
+        >
+          Dashboard
+        </Link> : null
+         }
           <Divider></Divider>
 
           {isLogin ? (
