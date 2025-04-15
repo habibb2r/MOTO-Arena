@@ -25,13 +25,7 @@ A modern, full-stack e-commerce platform built for motorcycle enthusiasts. This 
 - **Axios** for API requests
 - **React Router** for routing
 
-### Backend Dependencies
 
-- **Node.js** & **Express.js**
-- **MongoDB** with **Mongoose**
-- **JWT** for authentication
-- **Stripe** for payment processing
-- **Cloudinary** for image management
 
 ### Development Tools
 
@@ -69,9 +63,6 @@ A modern, full-stack e-commerce platform built for motorcycle enthusiasts. This 
    # Stripe Keys
    VITE_STRIPE_SECRET =your_stripe_publishable_key
 
-   # JWT Secret
-   VITE_JWT_SECRET=your_jwt_secret
-   ```
 
 4. **Start the development server**
 
@@ -88,9 +79,6 @@ A modern, full-stack e-commerce platform built for motorcycle enthusiasts. This 
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run lint` - Run ESLint
-- `npm run preview` - Preview production build locally
-
 
 
 ## 🌟 Project Structure
