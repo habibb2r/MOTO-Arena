@@ -2,6 +2,13 @@
 
 A modern, full-stack e-commerce platform built for motorcycle enthusiasts. This application provides a seamless shopping experience for premium motorcycles with features like role-based authentication, real-time order tracking, and secure payment integration.
 
+### Admin Login
+
+```bash
+Email : habibb2r@admin.mail
+Password : 1234Ha
+```
+
 ## ⚡ Key Features
 
 - 🛡️ Role-based authentication (Admin/Customer)
@@ -141,12 +148,7 @@ The application is fully responsive and optimized for:
 ```bash
 https://moto-arena-habibb2r.pages.dev/
 ```
-### Admin Login
 
-```bash
-Email : habibb2r@admin.mail
-Password : 1234Ha
-```
 
 ## 📄 License
 
