@@ -2,6 +2,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import Title from "./Title";
 import { motion } from "framer-motion";
+import person1 from "/src/assets/images/person1.png";
+import person2 from "/src/assets/images/person2.png";
+import person3 from "/src/assets/images/person3.png";
+import person4 from "/src/assets/images/person4.png";
+import person5 from "/src/assets/images/person5.png";
+import person6 from "/src/assets/images/person6.png";
 
 interface Client {
   name: string;
@@ -14,7 +20,7 @@ interface Client {
 const clients: Client[] = [
   {
     name: "Alex Rodriguez",
-    img: "/src/assets/images/person1.png",
+    img: `${person1}`,
     comment:
       "The Kawasaki Ninja from Moto Arena exceeded my expectations. The buying process was smooth, and their after-sales service is exceptional. A true rider's paradise!",
     role: "Professional Racer",
@@ -22,7 +28,7 @@ const clients: Client[] = [
   },
   {
     name: "Sarah Chen",
-    img: "/src/assets/images/person2.png",
+    img: `${person2}`,
     comment:
       "As a first-time rider, the team at Moto Arena guided me perfectly. They helped me choose the perfect bike and provided excellent riding tips. Couldn't be happier!",
     role: "Adventure Enthusiast",
@@ -30,7 +36,7 @@ const clients: Client[] = [
   },
   {
     name: "Michael Thompson",
-    img: "/src/assets/images/person3.png",
+    img: `${person3}`,
     comment:
       "The collection at Moto Arena is impressive. Found my dream Ducati here, and their financing options made it possible. The staff's knowledge is unmatched!",
     role: "Motorcycle Collector",
@@ -38,7 +44,7 @@ const clients: Client[] = [
   },
   {
     name: "Emma Watson",
-    img: "/src/assets/images/person4.png",
+    img: `${person4}`,
     comment:
       "The customization options available at Moto Arena are fantastic. They turned my standard bike into a head-turner. Their mechanics are true artists!",
     role: "Custom Bike Enthusiast",
@@ -46,7 +52,7 @@ const clients: Client[] = [
   },
   {
     name: "David Kim",
-    img: "/src/assets/images/person5.png",
+    img: `${person5}`,
     comment:
       "Regular maintenance at Moto Arena keeps my bike running perfectly. Their technical expertise and genuine parts policy give me complete peace of mind.",
     role: "Daily Commuter",
@@ -54,7 +60,7 @@ const clients: Client[] = [
   },
   {
     name: "Lisa Patel",
-    img: "/src/assets/images/person6.png",
+    img: `${person6}`,
     comment:
       "The track day events organized by Moto Arena are incredible. Great community, amazing bikes, and professional guidance. Best motorcycle dealer in the region!",
     role: "Track Day Enthusiast",

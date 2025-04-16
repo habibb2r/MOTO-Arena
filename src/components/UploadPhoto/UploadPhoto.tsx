@@ -13,7 +13,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({ fileList, setFileList }) => {
     const file = selectedFile ? e.target.files : [];
     if (selectedFile) {
       setFileList(file);
-      setPreviewUrl(URL.createObjectURL(selectedFile)); // Optional: For image preview
+      setPreviewUrl(URL.createObjectURL(selectedFile)); 
     }
   };
 

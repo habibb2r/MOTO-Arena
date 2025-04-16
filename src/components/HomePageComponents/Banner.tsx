@@ -16,7 +16,7 @@ const Banner = () => {
      
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
 
-      {/* Content Container */}
+   
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 md:px-16 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

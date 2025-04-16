@@ -141,6 +141,12 @@ The application is fully responsive and optimized for:
 ```bash
 https://moto-arena-habibb2r.pages.dev/
 ```
+### Admin Login
+
+```bash
+Email : habibb2r@admin.mail
+Password : 1234Ha
+```
 
 ## 📄 License
 

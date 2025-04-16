@@ -10,7 +10,7 @@ const Client_Card: React.FC<ClientCardProps> = ({ img, comment, name }) => {
   return (
     <div className="mt-20 mb-8">
       <div className="relative mx-auto bg-orange-50 shadow-sm shadow-primary rounded-lg max-w-sm border-2 border-primary">
-        {/* Profile Image */}
+     
         <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 rounded-full z-50 overflow-hidden shadow-lg w-32 h-32">
           <img
             className="object-cover z-40 w-full h-full"
@@ -18,7 +18,7 @@ const Client_Card: React.FC<ClientCardProps> = ({ img, comment, name }) => {
             alt="Profile Image"
           />
         </div>
-        {/* Card Content */}
+    
         <div className="pt-24 pb-8">
           <p className="font-roboto text-accent max-w-md text-center mx-auto px-4">
             {comment}

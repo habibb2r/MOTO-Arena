@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  FaEye,
-  FaEyeSlash,
-  FaMotorcycle,
-  FaCloudUploadAlt,
-} from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaMotorcycle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 import { useSignupMutation } from "../../redux/features/auth/authApi";
 import { motion } from "framer-motion";
 import GeneratePhotoURL from "../../components/UploadPhoto/GeneratePhotoURL";
+import UploadPhoto from "../../components/UploadPhoto/UploadPhoto";
 
 interface RegisterFormValues {
   name: string;
@@ -28,7 +24,7 @@ interface RegisterResponse {
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [fileList, setFileList] = useState([]);
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
@@ -47,11 +43,18 @@ const Register = () => {
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
       setLoading(true);
-      const image = data.image[0];
-      const imageUrl = await GeneratePhotoURL(image)
+      const image = fileList[0];
+      if (!image) {
+        toast.error("Please select a profile image");
+        setLoading(false);
+        return;
+      }
+      const imageUrl = await GeneratePhotoURL(image);
       const userInfo = {
-        ...data,
-        photoURL : imageUrl,
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        photoURL: imageUrl,
       };
 
       console.log("userInfo", userInfo);
@@ -63,6 +66,7 @@ const Register = () => {
           duration: 2000,
         });
         reset();
+        setFileList([]);
         setLoading(false);
         navigate("/login");
       }
@@ -78,13 +82,19 @@ const Register = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white p-8 rounded-2xl shadow-xl"
         >
-          <RingLoader size={80} color="#f97316" />
+          <div className="flex flex-col items-center gap-4">
+            <RingLoader size={60} color="#f97316" />
+            <p className="text-gray-600 font-medium animate-pulse">
+              Creating your account...
+            </p>
+          </div>
         </motion.div>
       </div>
     );
@@ -239,39 +249,7 @@ const Register = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Profile Image
                   </label>
-                  <div className="relative">
-                    <input
-                      {...register("image", {
-                        required: "Profile image is required",
-                      })}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      id="profile-image"
-                    />
-                    <label
-                      htmlFor="profile-image"
-                      className={`w-full px-4 py-3 rounded-lg border-2 border-dashed transition-colors flex items-center justify-center gap-2 cursor-pointer ${
-                        errors.image
-                          ? "border-orange-500 hover:border-orange-600"
-                          : "border-gray-200 hover:border-orange-500"
-                      }`}
-                    >
-                      <FaCloudUploadAlt className="text-2xl text-gray-400" />
-                      <span className="text-gray-500">
-                        Choose a profile image
-                      </span>
-                    </label>
-                  </div>
-                  {errors.image && (
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-orange-500 text-sm mt-1"
-                    >
-                      {errors.image.message}
-                    </motion.p>
-                  )}
+                  <UploadPhoto fileList={fileList} setFileList={setFileList} />
                 </div>
               </motion.div>
 
