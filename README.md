@@ -60,14 +60,9 @@ Password : 1234Ha
    Create a `.env` file in the root directory with the following variables:
 
    ```env
-   # Backend URL
    VITE_BASE_URL=your_backend_url
-
-   # Cloudinary Configuration
    VITE_CLOUD_NAME=your_cloud_name
    VITE_PRESET=your_upload_preset
-
-   # Stripe Keys
    VITE_STRIPE_SECRET =your_stripe_publishable_key
 
 
