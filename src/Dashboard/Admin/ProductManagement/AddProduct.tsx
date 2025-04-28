@@ -143,7 +143,7 @@ const AddProduct = () => {
           </div>
           <div className="flex justify-start items-center px-4 bg-white">
             <Form.Item>
-              <Button htmlType="submit" type="primary">
+              <Button className="bg-green-700 text-white" htmlType="submit" type="primary">
                 Add Prodcut
               </Button>
             </Form.Item>

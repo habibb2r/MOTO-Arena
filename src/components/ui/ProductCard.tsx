@@ -9,7 +9,7 @@ interface ProductCardProps {
   category: string;
   brand: string;
   price: number;
-  inStock: boolean;
+  quantity: number;
   photoURL: string;
   url: string;
 }
@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   category,
   brand,
   price,
-  inStock,
+  quantity,
   photoURL,
   url,
 }) => {
@@ -47,10 +47,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute top-4 right-4">
           <div
             className={`px-3 py-1 rounded-full text-sm font-medium ${
-              inStock ? "bg-green-500 text-white" : "bg-red-500 text-white"
+              quantity> 0 ? "bg-green-500 text-white" : "bg-red-500 text-white"
             }`}
           >
-            {inStock ? "In Stock" : "Out of Stock"}
+            {quantity> 0 ?  "In Stock" : "Out of Stock"}
           </div>
         </div>
       </div>

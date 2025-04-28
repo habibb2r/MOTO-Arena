@@ -8,7 +8,7 @@ const Banner = () => {
         autoPlay
         loop
         muted
-        className="absolute inset-0 object-cover w-full h-full"
+        className="absolute inset-0 object-cover w-full h-full blur-sm"
       >
         <source src={video} type="video/mp4" />
       </video>

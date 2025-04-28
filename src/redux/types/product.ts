@@ -8,7 +8,7 @@ export type TProduct = {
   category: string;
   photo?: string;
   description: string;
-  quantity: number;
+  quantity?: number;
   inStock: boolean;
   isDeleted: boolean;
   createdAt?: Date; 

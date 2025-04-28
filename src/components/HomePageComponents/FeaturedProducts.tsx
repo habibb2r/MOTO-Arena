@@ -38,7 +38,7 @@ const FeatureSection = () => {
                 category={product?.category}
                 brand={product?.brand}
                 price={product?.price}
-                inStock={product?.inStock}
+                quantity={product?.quantity ?? 0}
                 photoURL={product?.photo as string}
                 url={`/products/${product?._id}`}
               />

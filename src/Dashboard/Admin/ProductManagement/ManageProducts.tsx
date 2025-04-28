@@ -150,7 +150,7 @@ const ManageProducts = () => {
           {quantity}
         </span>
       ),
-      sorter: (a: TProduct, b: TProduct) => a.quantity - b.quantity,
+      sorter: (a: TProduct, b: TProduct) => (a.quantity ?? 0) - (b.quantity ?? 0),
     },
     {
       title: "Status",

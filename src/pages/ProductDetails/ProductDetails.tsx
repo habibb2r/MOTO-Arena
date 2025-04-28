@@ -84,13 +84,13 @@ const ProductDetails = () => {
     <section className="bg-gradient-to-r from-gray-50 to-gray-100 min-h-screen py-12">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* Product Name and Images */}
+     
           <div className="lg:w-1/2">
             <h1 className="text-4xl font-bold text-gray-800 mb-6">
               {singleProduct?.data?.name}
             </h1>
 
-            {/* Main Image */}
+            
             <div className="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
               <img
                 src={selectedImage || singleProduct?.data?.photo}
@@ -99,7 +99,7 @@ const ProductDetails = () => {
               />
             </div>
 
-            {/* Thumbnail Images */}
+     
             <div className="grid grid-cols-4 gap-2">
               {productImages.map((image: string, index: number) => (
                 <button
@@ -154,14 +154,14 @@ const ProductDetails = () => {
                 <div className="flex items-center justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600 font-medium">Status</span>
                   <span
-                    className={`px-4 py-1 rounded-full text-sm font-semibold ${
-                      singleProduct?.data?.inStock
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                    className={`font-semibold ${
+                      singleProduct?.data?.quantity > 0
+                        ? "text-blue-600"
+                        : "text-red-600"
                     }`}
                   >
-                    {singleProduct?.data?.inStock
-                      ? "Available"
+                    {singleProduct?.data?.quantity > 0
+                      ? 'In Stock'
                       : "Out of Stock"}
                   </span>
                 </div>
