@@ -30,13 +30,13 @@ const ManageProducts = () => {
   const [getmaxPrice, setMaxPrice] = useState(Infinity);
   const [getCategory, setCategory] = useState("");
   const [getbrand, setBrand] = useState("");
-  const [available, setAvailable] = useState(true);
+  // const [available, setAvailable] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | undefined>();
 
   const { data: getAllProducts, isLoading } = useGetAllProductsQuery({
-    inStock: available,
+    // inStock: available,
     search: searchTerm,
     brand: getbrand,
     category: getCategory,
@@ -65,7 +65,7 @@ const ManageProducts = () => {
     setMaxPrice(value?.maxPrice || Infinity);
     setCategory(value?.model || "");
     setBrand(value?.brand || "");
-    setAvailable(value?.inStock ?? true);
+    // setAvailable(value?.inStock ?? true);
     toast.success("Filters applied successfully");
   };
 
@@ -94,7 +94,7 @@ const ManageProducts = () => {
     setCategory("");
     setBrand("");
     setSearchTerm("");
-    setAvailable(true);
+    // setAvailable(true);
     toast.success("Filters cleared");
   };
 
@@ -146,7 +146,7 @@ const ManageProducts = () => {
       dataIndex: "quantity",
       key: "quantity",
       render: (quantity: number) => (
-        <span className={quantity > 0 ? "text-green-600" : "text-red-600"}>
+        <span className={quantity >= 0 ? "text-green-600" : "text-red-600"}>
           {quantity}
         </span>
       ),
@@ -154,8 +154,8 @@ const ManageProducts = () => {
     },
     {
       title: "Status",
-      dataIndex: "inStock",
-      key: "inStock",
+      dataIndex: "quantity",
+      key: "quantity",
       render: (inStock: boolean) => (
         <span
           className={`px-2 py-1 rounded-full text-sm ${
