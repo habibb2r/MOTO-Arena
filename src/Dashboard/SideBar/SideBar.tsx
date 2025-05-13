@@ -7,6 +7,7 @@ import {
   FileAddOutlined,
   SearchOutlined,
   SolutionOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { useAppSelector } from "../../redux/hooks";
 import { useCurrentUser } from "../../redux/features/auth/authSlice";
@@ -27,6 +28,10 @@ const SideBar = () => {
       name: "My Profile",
       icon: UserOutlined,
       path: "/dashboard/admin",
+    },    {
+      name: "Overview",
+      icon: DashboardOutlined,
+      path: "/dashboard/admin/overview",
     },
     {
       name: "User Management",
