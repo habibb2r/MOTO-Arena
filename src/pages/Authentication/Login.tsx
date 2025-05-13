@@ -38,6 +38,11 @@ interface ApiError {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast.success('Copied to clipboard!');
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -80,149 +85,188 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center px-4 bg-gradient-to-br from-gray-50 to-gray-100">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="px-8 pt-8 pb-6 bg-gradient-to-r from-orange-500 to-orange-600">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center shadow-lg"
-            >
-              <FaMotorcycle className="text-3xl text-orange-500" />
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-3xl font-bold text-center text-white mt-4"
-            >
-              Welcome Back
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-center text-white/80 mt-2"
-            >
-              Log in to continue your journey with Moto Arena
-            </motion.p>
-          </div>
-
-          <div className="p-8">
-            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl w-full">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Left Column - Demo Credentials */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-white p-8 rounded-2xl shadow-xl border border-orange-100 h-fit"
+          >
+            <div className="text-center mb-8">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="space-y-4"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="flex justify-center"
               >
+               
+              </motion.div>
+              <h2 className="mt-6 text-2xl font-bold text-gray-900">
+                Demo Credentials
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              {/* Admin Credentials */}
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Admin Login</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-gray-600">Email: habibb2r@admin.mail</p>
+                    <button
+                      onClick={() => copyToClipboard('habibb2r@admin.mail')}
+                      className="text-orange-500 hover:text-orange-600 p-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-gray-600">Password: 1234Ha</p>
+                    <button
+                      onClick={() => copyToClipboard('1234Ha')}
+                      className="text-orange-500 hover:text-orange-600 p-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* User Credentials */}
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">User Login</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-gray-600">Email: customer@mail.usm</p>
+                    <button
+                      onClick={() => copyToClipboard('customer@mail.usm')}
+                      className="text-orange-500 hover:text-orange-600 p-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-gray-600">Password: 12345Aa</p>
+                    <button
+                      onClick={() => copyToClipboard('12345Aa')}
+                      className="text-orange-500 hover:text-orange-600 p-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Login Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-white p-8 rounded-2xl shadow-xl border border-orange-100"
+          >
+            
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-gray-900">
+                Welcome Back!
+              </h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Please sign in to your account
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+              <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
+                  <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                    Email
                   </label>
                   <input
+                    id="email"
+                    type="email"
                     {...register("email", {
                       required: "Email is required",
                       pattern: {
-                        value:
-                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         message: "Invalid email address",
                       },
                     })}
-                    type="email"
-                    placeholder="Enter your email..."
-                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                      errors.email
-                        ? "border-orange-500 focus:border-orange-600"
-                        : "border-gray-200 focus:border-orange-500"
-                    } focus:outline-none`}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                   />
                   {errors.email && (
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-orange-500 text-sm mt-1"
-                    >
-                      {errors.email.message || "Email is required"}
-                    </motion.p>
+                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="password" className="text-sm font-medium text-gray-700">
                     Password
                   </label>
-                  <div className="relative">
+                  <div className="mt-1 relative">
                     <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
                       {...register("password", {
                         required: "Password is required",
+                        minLength: {
+                          value: 6,
+                          message: "Password must be at least 6 characters",
+                        },
                       })}
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password..."
-                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${
-                        errors.password
-                          ? "border-orange-500 focus:border-orange-600"
-                          : "border-gray-200 focus:border-orange-500"
-                      } focus:outline-none`}
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                     />
                     <button
                       type="button"
                       onClick={togglePasswordVisibility}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
                     >
                       {showPassword ? (
-                        <FaEyeSlash className="w-5 h-5" />
+                        <FaEyeSlash className="h-5 w-5" />
                       ) : (
-                        <FaEye className="w-5 h-5" />
+                        <FaEye className="h-5 w-5" />
                       )}
                     </button>
                   </div>
                   {errors.password && (
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-orange-500 text-sm mt-1"
-                    >
-                      {errors.password.message || "Password is required"}
-                    </motion.p>
+                    <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
                   )}
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
+              <div>
                 <button
                   type="submit"
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg 
-                           transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                  className="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-200"
                 >
                   Sign In
                 </button>
+              </div>
 
-                <p className="text-center mt-6 text-gray-600">
-                  New to Moto Arena?{" "}
+              <div className="text-center">
+                <p className="text-sm text-gray-600">
+                  Don't have an account?{" "}
                   <Link
-                    to={"/register"}
-                    className="text-orange-500 hover:text-orange-600 font-medium hover:underline transition-colors"
+                    to="/register"
+                    className="font-medium text-orange-500 hover:text-orange-600 transition-colors"
                   >
-                    Create Account
+                    Register here
                   </Link>
                 </p>
-              </motion.div>
+              </div>
             </form>
-          </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
